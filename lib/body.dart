@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'form.dart';
 
 class Body extends StatelessWidget{
   @override
@@ -7,7 +8,6 @@ class Body extends StatelessWidget{
     return Container(
       padding: EdgeInsets.all(10.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           getImageAsset(),
           SUIForm()
@@ -18,7 +18,7 @@ class Body extends StatelessWidget{
 
   Image getImageAsset() {
     var assetImage = new AssetImage("images/download.png");
-    var image = Image(image: assetImage,);
+    var image = Image(image: assetImage, height: 125.0, width: 125.0,);
     return image;
   }
 
