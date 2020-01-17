@@ -18,6 +18,11 @@ class _SUIFormState extends State<SUIForm> {
   var _time = 0;
   var _interest = 0.0;
 
+  //Form controllers
+  TextEditingController _prinController = new TextEditingController();
+  TextEditingController _rateController = new TextEditingController();
+  TextEditingController _timeController = new TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +38,7 @@ class _SUIFormState extends State<SUIForm> {
               autofocus: false,
               keyboardType: TextInputType.number,
               style: textStyle,
+              controller: _prinController,
               decoration: InputDecoration(
                   labelText: "Principal",
                   hintText: "Principal e.g 12000",
@@ -45,6 +51,7 @@ class _SUIFormState extends State<SUIForm> {
             child: TextField(
               autofocus: false,
               style: textStyle,
+              controller: _rateController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   labelText: "Interest Rate",
@@ -63,6 +70,7 @@ class _SUIFormState extends State<SUIForm> {
                     autofocus: false,
                     keyboardType: TextInputType.number,
                     style: textStyle,
+                    controller: _timeController,
                     decoration: InputDecoration(
                         labelText: "Term",
                         hintText: "e.g 6",
@@ -116,7 +124,11 @@ class _SUIFormState extends State<SUIForm> {
                   child: RaisedButton(
                     color: Theme.of(context).primaryColorDark,
                     child: Text("Reset", textScaleFactor: 1.5,),
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        reset();
+                      });
+                    },
                   ),
                 )
               ],
@@ -132,12 +144,17 @@ class _SUIFormState extends State<SUIForm> {
   }
 
   double calculateInterest() {
-      int mTime = _time;
-      double mPrincipal = _principal;
-      double mRate = _rate;
+      _principal = double.parse(_prinController.text);
+      _rate = double.parse(_rateController.text);
+      _time = int.parse(_timeController.text);
 
-      var mInterest = (mPrincipal * mRate * mTime)/100;
-
+      var mInterest = (_principal * _rate * _time)/100;
       return mInterest;
+  }
+
+  reset(){
+    _prinController.text = "";
+    _timeController.text = "";
+    _rateController.text = "";
   }
 }
