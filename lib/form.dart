@@ -10,7 +10,13 @@ class SUIForm extends StatefulWidget {
 class _SUIFormState extends State<SUIForm> {
   var _minimumPadding = 5.0;
   var _currency = ["Naira", "Dollars", "Pounds", "Cedis"];
-  var _selectedCurrency = "Naira";
+  var _selectedCurrency = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedCurrency = _currency[0];
+  }
 
   //the parameters of the interest
   var _principal = 0.0;
@@ -156,5 +162,6 @@ class _SUIFormState extends State<SUIForm> {
     _prinController.text = "";
     _timeController.text = "";
     _rateController.text = "";
+    _selectedCurrency = _currency[0];
   }
 }
