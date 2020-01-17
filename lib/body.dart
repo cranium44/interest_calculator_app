@@ -9,17 +9,17 @@ class Body extends StatelessWidget{
       padding: EdgeInsets.all(10.0),
       child: Column(
         children: <Widget>[
-          getImageAsset(),
+         getImageAsset(),
           SUIForm()
         ],
       ),
     );
   }
 
-  Image getImageAsset() {
+  Widget getImageAsset() {
     var assetImage = new AssetImage("images/download.png");
     var image = Image(image: assetImage, height: 125.0, width: 125.0,);
-    return image;
+    return Container(margin: EdgeInsets.all(50.0), child: image,);
   }
 
 }
