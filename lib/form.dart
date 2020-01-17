@@ -100,7 +100,7 @@ class _SUIFormState extends State<SUIForm> {
                   flex: 1,
                   child: RaisedButton(
                     color: Theme.of(context).primaryColor,
-                    child: Text("Calculate"),
+                    child: Text("Calculate", textScaleFactor: 1.5,),
                     onPressed: (){
                       setState(() {
                         _interest = calculateInterest();
@@ -113,7 +113,7 @@ class _SUIFormState extends State<SUIForm> {
                   flex: 1,
                   child: RaisedButton(
                     color: Theme.of(context).primaryColorDark,
-                    child: Text("Reset"),
+                    child: Text("Reset", textScaleFactor: 1.5,),
                     onPressed: () {},
                   ),
                 )
