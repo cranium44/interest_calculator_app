@@ -55,7 +55,7 @@ class _SUIFormState extends State<SUIForm> {
                         hintText: "e.g 6",
                         border: OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.circular(_minimumPadding))),
+                                BorderRadius.circular(_minimumPadding))),
                   ),
                 ),
               ),
@@ -78,6 +78,28 @@ class _SUIFormState extends State<SUIForm> {
                 ),
               )
             ],
+          ),
+          Container(
+            padding: EdgeInsets.all(_minimumPadding),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: RaisedButton(
+                    child: Text("Calculate"),
+                    onPressed: () {},
+                  ),
+                ),
+                Container(width: _minimumPadding * 5,),
+                Expanded(
+                  flex: 1,
+                  child: RaisedButton(
+                    child: Text("Reset"),
+                    onPressed: () {},
+                  ),
+                )
+              ],
+            ),
           )
         ],
       ),
