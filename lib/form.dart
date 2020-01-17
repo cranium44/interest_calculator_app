@@ -18,15 +18,40 @@ class _SUIFormState extends State<SUIForm> {
           Padding(
             padding: EdgeInsets.all(_minimumPadding),
             child: TextField(
+              autofocus: false,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   labelText: "Principal",
                   hintText: "Principal e.g 12000",
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(_minimumPadding)
-                  )
-              ),
+                      borderRadius: BorderRadius.circular(_minimumPadding))),
             ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(_minimumPadding),
+            child: TextField(
+              autofocus: false,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                  labelText: "Interest Rate",
+                  hintText: "Interest rate e.g 5.2",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(_minimumPadding))),
+            ),
+          ),
+          Row(
+            children: <Widget>[
+              TextField(
+                autofocus: false,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                    labelText: "Term",
+                    hintText: "e.g 6",
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(_minimumPadding))),
+              ),
+              DropdownButton()
+            ],
           )
         ],
       ),
