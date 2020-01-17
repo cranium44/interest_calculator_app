@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       home: Scaffold(
+        resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           title: Text("Simple Interest Calcuclator App"),
         ),

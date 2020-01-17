@@ -12,10 +12,17 @@ class _SUIFormState extends State<SUIForm> {
   var _currency = ["Naira", "Dollars", "Pounds", "Cedis"];
   var _selectedCurrency = "Naira";
 
+  //the parameters of the interest
+  var _principal = 0.0;
+  var _rate = 0.0;
+  var _time = 0;
+  var _interest = 0.0;
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
+      child: ListView(
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(_minimumPadding),
@@ -87,7 +94,11 @@ class _SUIFormState extends State<SUIForm> {
                   flex: 1,
                   child: RaisedButton(
                     child: Text("Calculate"),
-                    onPressed: () {},
+                    onPressed: (){
+                      setState(() {
+                        _interest = calculateInterest();
+                      });
+                    },
                   ),
                 ),
                 Container(width: _minimumPadding * 5,),
@@ -100,9 +111,23 @@ class _SUIFormState extends State<SUIForm> {
                 )
               ],
             ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(_minimumPadding),
+            child: Text("Interest is $_interest $_selectedCurrency"),
           )
         ],
       ),
     );
+  }
+
+  double calculateInterest() {
+      int mTime = _time;
+      double mPrincipal = _principal;
+      double mRate = _rate;
+
+      var mInterest = (mPrincipal * mRate * mTime)/100;
+
+      return mInterest;
   }
 }
