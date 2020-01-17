@@ -21,14 +21,18 @@ class _SUIFormState extends State<SUIForm> {
 
   @override
   Widget build(BuildContext context) {
+    TextStyle textStyle = Theme.of(context).textTheme.title;
+
     return Container(
       child: ListView(
+        shrinkWrap: true,
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(_minimumPadding),
             child: TextField(
               autofocus: false,
               keyboardType: TextInputType.number,
+              style: textStyle,
               decoration: InputDecoration(
                   labelText: "Principal",
                   hintText: "Principal e.g 12000",
@@ -40,6 +44,7 @@ class _SUIFormState extends State<SUIForm> {
             padding: EdgeInsets.all(_minimumPadding),
             child: TextField(
               autofocus: false,
+              style: textStyle,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   labelText: "Interest Rate",
@@ -51,12 +56,13 @@ class _SUIFormState extends State<SUIForm> {
           Row(
             children: <Widget>[
               Expanded(
-                flex: 5,
+                flex: 4,
                 child: Padding(
                   padding: EdgeInsets.all(_minimumPadding),
                   child: TextField(
                     autofocus: false,
                     keyboardType: TextInputType.number,
+                    style: textStyle,
                     decoration: InputDecoration(
                         labelText: "Term",
                         hintText: "e.g 6",
@@ -67,10 +73,10 @@ class _SUIFormState extends State<SUIForm> {
                 ),
               ),
               Expanded(
-                flex: 1,
                 child: Padding(
                   padding: EdgeInsets.all(_minimumPadding),
                   child: DropdownButton<String>(
+                    style: textStyle,
                     items: _currency.map((String item) {
                       return DropdownMenuItem(
                         value: item,
@@ -93,6 +99,7 @@ class _SUIFormState extends State<SUIForm> {
                 Expanded(
                   flex: 1,
                   child: RaisedButton(
+                    color: Theme.of(context).primaryColor,
                     child: Text("Calculate"),
                     onPressed: (){
                       setState(() {
@@ -105,6 +112,7 @@ class _SUIFormState extends State<SUIForm> {
                 Expanded(
                   flex: 1,
                   child: RaisedButton(
+                    color: Theme.of(context).primaryColorDark,
                     child: Text("Reset"),
                     onPressed: () {},
                   ),
@@ -114,7 +122,7 @@ class _SUIFormState extends State<SUIForm> {
           ),
           Padding(
             padding: EdgeInsets.all(_minimumPadding),
-            child: Text("Interest is $_interest $_selectedCurrency"),
+            child: Text("Interest is $_interest $_selectedCurrency",style: textStyle,),
           )
         ],
       ),
