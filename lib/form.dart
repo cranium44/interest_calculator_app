@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SUIForm extends StatefulWidget {
   @override
@@ -46,12 +47,16 @@ class _SUIFormState extends State<SUIForm> {
             child: TextFormField(
               autofocus: false,
               keyboardType: TextInputType.number,
+              inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
               validator: (String value){
                 String message;
                 if(value.isEmpty){
-                   message = "Please enter a valid number";
-                }else if(double.parse(value).isNaN){
-                  message = "Invalid input";
+                  message = "Field must not be empty";
+//                  try{
+//                    double.parse(value);
+//                  }catch(e){
+//                    message = "Input must be a Valid Number";
+//                  }
                 }
                 return message;
               },
@@ -75,12 +80,16 @@ class _SUIFormState extends State<SUIForm> {
               style: textStyle,
               controller: _rateController,
               keyboardType: TextInputType.number,
+              inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
               validator: (String value){
                 String message;
                 if(value.isEmpty){
-                  message = "Please enter a valid Rate";
-                }else if(double.parse(value).isNaN){
-                  message = "Invalid input";
+                  message = "Field must not be empty";
+                  try{
+                    double.parse(value);
+                  }catch(e){
+                    message = "Input must be a Valid Number";
+                  }
                 }
                 return message;
               },
@@ -104,12 +113,16 @@ class _SUIFormState extends State<SUIForm> {
                   child: TextFormField(
                     autofocus: false,
                     keyboardType: TextInputType.number,
+                    inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
                     validator: (String value){
                       String message;
                       if(value.isEmpty){
-                        message = "Please enter a valid Time";
-                      }else if(double.parse(value).isNaN){
-                        message = "Invalid input";
+                        message = "Field must not be empty";
+                        try{
+                          double.parse(value);
+                        }catch(e){
+                          message = "Input must be a Valid Number";
+                        }
                       }
                       return message;
                     },
@@ -207,5 +220,12 @@ class _SUIFormState extends State<SUIForm> {
     _timeController.text = "";
     _rateController.text = "";
     _selectedCurrency = _currency[0];
+  }
+
+  bool isNumeric(String s) {
+    if(s == null) {
+      return false;
+    }
+    return double.parse(s, (e) => null) != null;
   }
 }
