@@ -12,6 +12,8 @@ class _SUIFormState extends State<SUIForm> {
   var _currency = ["Naira", "Dollars", "Pounds", "Cedis"];
   var _selectedCurrency = "";
 
+  var _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
@@ -34,34 +36,61 @@ class _SUIFormState extends State<SUIForm> {
   Widget build(BuildContext context) {
     TextStyle textStyle = Theme.of(context).textTheme.title;
 
-    return Container(
+    return Form(
+      key: _formKey,
       child: ListView(
         shrinkWrap: true,
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(_minimumPadding),
-            child: TextField(
+            child: TextFormField(
               autofocus: false,
               keyboardType: TextInputType.number,
+              validator: (String value){
+                String message;
+                if(value.isEmpty){
+                   message = "Please enter a valid number";
+                }else if(double.parse(value).isNaN){
+                  message = "Invalid input";
+                }
+                return message;
+              },
               style: textStyle,
               controller: _prinController,
               decoration: InputDecoration(
                   labelText: "Principal",
                   hintText: "Principal e.g 12000",
+                  errorStyle: TextStyle(
+                    color: Colors.yellowAccent,
+                    fontSize: 15.0
+                  ),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(_minimumPadding))),
             ),
           ),
           Padding(
             padding: EdgeInsets.all(_minimumPadding),
-            child: TextField(
+            child: TextFormField(
               autofocus: false,
               style: textStyle,
               controller: _rateController,
               keyboardType: TextInputType.number,
+              validator: (String value){
+                String message;
+                if(value.isEmpty){
+                  message = "Please enter a valid Rate";
+                }else if(double.parse(value).isNaN){
+                  message = "Invalid input";
+                }
+                return message;
+              },
               decoration: InputDecoration(
                   labelText: "Interest Rate",
                   hintText: "Interest rate e.g 5.2",
+                  errorStyle: TextStyle(
+                    color: Colors.yellowAccent,
+                    fontSize: 15.0
+                  ),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(_minimumPadding))),
             ),
@@ -72,14 +101,27 @@ class _SUIFormState extends State<SUIForm> {
                 flex: 4,
                 child: Padding(
                   padding: EdgeInsets.all(_minimumPadding),
-                  child: TextField(
+                  child: TextFormField(
                     autofocus: false,
                     keyboardType: TextInputType.number,
+                    validator: (String value){
+                      String message;
+                      if(value.isEmpty){
+                        message = "Please enter a valid Time";
+                      }else if(double.parse(value).isNaN){
+                        message = "Invalid input";
+                      }
+                      return message;
+                    },
                     style: textStyle,
                     controller: _timeController,
                     decoration: InputDecoration(
                         labelText: "Term",
                         hintText: "e.g 6",
+                        errorStyle: TextStyle(
+                            color: Colors.yellowAccent,
+                            fontSize: 15.0
+                        ),
                         border: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.circular(_minimumPadding))),
@@ -119,7 +161,9 @@ class _SUIFormState extends State<SUIForm> {
                     child: Text("Calculate", textScaleFactor: 1.5,),
                     onPressed: (){
                       setState(() {
-                        _interest = calculateInterest();
+                        if(_formKey.currentState.validate()){
+                          _interest = calculateInterest();
+                        }
                       });
                     },
                   ),
