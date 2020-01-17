@@ -84,7 +84,9 @@ class _SUIFormState extends State<SUIForm> {
                       );
                     }).toList(),
                     onChanged: (String value) {
-                      _selectedCurrency = value;
+                      setState(() {
+                        _selectedCurrency = value;
+                      });
                     },
                     value: _selectedCurrency,
                   ),
