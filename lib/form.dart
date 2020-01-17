@@ -9,6 +9,8 @@ class SUIForm extends StatefulWidget {
 
 class _SUIFormState extends State<SUIForm> {
   var _minimumPadding = 5.0;
+  var _currency = ["Naira", "Dollars", "Pounds", "Cedis"];
+  var _selectedCurrency = "Naira";
 
   @override
   Widget build(BuildContext context) {
@@ -41,16 +43,40 @@ class _SUIFormState extends State<SUIForm> {
           ),
           Row(
             children: <Widget>[
-              TextField(
-                autofocus: false,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                    labelText: "Term",
-                    hintText: "e.g 6",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(_minimumPadding))),
+              Expanded(
+                flex: 5,
+                child: Padding(
+                  padding: EdgeInsets.all(_minimumPadding),
+                  child: TextField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        labelText: "Term",
+                        hintText: "e.g 6",
+                        border: OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.circular(_minimumPadding))),
+                  ),
+                ),
               ),
-              DropdownButton()
+              Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: EdgeInsets.all(_minimumPadding),
+                  child: DropdownButton<String>(
+                    items: _currency.map((String item) {
+                      return DropdownMenuItem(
+                        value: item,
+                        child: Text(item),
+                      );
+                    }).toList(),
+                    onChanged: (String value) {
+                      _selectedCurrency = value;
+                    },
+                    value: _selectedCurrency,
+                  ),
+                ),
+              )
             ],
           )
         ],
